@@ -1,17 +1,18 @@
 resource "aws_instance" "app_server" {
-  ami           = var.ami_ubuntu
-  instance_type = "t3.medium"
+  ami                    = var.ami_ubuntu
+  instance_type          = "t2.small"
+  vpc_security_group_ids = [aws_security_group.web_server.id]
+
+  user_data = <<-EOF
+              #!/bin/bash
+              echo "Hello, ssamko" > index.html
+              nohup busybox httpd -f -p 8080 &
+              EOF
 
   tags = {
     Name = var.ec2_name
   }
 
-  user_data = <<EOF
-		#! /bin/bash
-    sudo apt-get update
-		sudo apt-get install -y nginx
-		sudo apt-get install -y npm
-		sudo systemctl start nginx
-		sudo systemctl enable nginx
-	EOF
+
+
 }

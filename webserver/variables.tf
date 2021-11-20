@@ -1,5 +1,6 @@
 variable "ec2_name" {
-  type = string
+  type    = string
+  default = "tr-fe"
 }
 
 variable "ami_ubuntu" {
