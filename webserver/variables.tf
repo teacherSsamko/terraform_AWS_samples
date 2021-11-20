@@ -12,3 +12,8 @@ variable "ami_amazon_linux2" {
   type    = string
   default = "ami-0e5b6b6a9f3db6db8" // Amazon Linux 2
 }
+
+variable "server_port" {
+  description = "The port the server will use for HTTP request"
+  type        = number
+}

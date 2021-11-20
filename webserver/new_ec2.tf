@@ -6,13 +6,11 @@ resource "aws_instance" "app_server" {
   user_data = <<-EOF
               #!/bin/bash
               echo "Hello, ssamko" > index.html
-              nohup busybox httpd -f -p 8080 &
+              nohup busybox httpd -f -p ${var.server_port} &
               EOF
 
   tags = {
     Name = var.ec2_name
   }
-
-
 
 }
